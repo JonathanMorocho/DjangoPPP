@@ -1,0 +1,20 @@
+<nav>
+    <div class="nav-wrapper cyan lighten-3">
+      <a href="#" class="brand-logo">Cursos</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/crear_curso">Nuevo Curso</a></li>
+        <li><a href="/lista_form/">Lista de Cursos</a></li>
+        <li><a href="/inscripciones/lista_estudiantes/">Lista de Estudiantes</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="/user/"></a>{{user.username}}</li>
+        <li><a href="/logout">salir</a></li>
+        {% else %}
+        <li><a href="/registro/">Registro</a></li>
+        <li><a href="/login">Entrada</a></li>
+
+
+        {% endif %}
+      </ul>
+    </div>
+  </nav>

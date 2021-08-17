@@ -1,0 +1,68 @@
+{% extends "main/principal.html" %}
+{% block titulo %} Lista de Cursos {% endblock titulo%}
+
+
+{% block  js %}
+    <script>
+        function eliminarCurso(id){
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+            })
+        }
+    </script>
+{% endblock  %}
+
+
+
+
+{% block content %}
+{{block.super}}
+<center><h1>Lista de Cursos</h1></center>
+
+<table class="table-striped">
+    <thead>
+        <tr >    
+            <th>Título</th>    
+            <th>Contenido</th>    
+            <th>Fecha Publicada</th> 
+            <th>Acciones</th>      
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for cur in cursos %}
+        <tr>    
+            <td>{{cur.curso_titulo}}</td>    
+            <td>{{cur.curso_contenido}}</td>    
+            <td>{{cur.curso_publicado}}</td>
+            <td><a href="{% url 'main:editarCurso' cur.id %}" class="btn btn-info btn-sm">Editar</a>  |  
+            <a href="{% url 'main:eliminarCurso' cur.id %}" class="btn btn-danger">Eliminar</a></td>
+    
+        </tr>
+        {% endfor %}
+
+    </tbody>
+
+
+</table>
+
+
+
+{% endblock content %}
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

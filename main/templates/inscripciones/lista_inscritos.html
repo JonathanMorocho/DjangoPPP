@@ -1,0 +1,66 @@
+{% extends 'main/principal.html' %}
+{% block titulo %} Inscripcion de Estudiantes {% endblock titulo%}
+
+{% block content %}
+
+<center><h3 id="tittle_pagina">Lista de Estudiantes Registrados {{ cursos }} </h3></center>
+
+<div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{message.tags}}"{% endif %}>
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Import: {% endif %}
+            {{ message }}
+
+        </li>
+        {% endfor%}
+    </ul>
+    {% endif %}
+</div>
+
+<table class="striped">
+    <thead>
+        <tr>    
+            <th>ID</th>
+            <th>Estudiante</th>    
+            <th>Fecha de Inscripcion</th>    
+            <th>Curso Inscrito</th>    
+            <th>Precio</th>    
+            <th>Opciones</th>    
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for est in inscritos_curso %}
+        <tr>    
+            <td>{{est.id}}</td>    
+            <td>{{est.estudiante}}</td>    
+            <td>{{est.fecha_inscripcion}}</td>    
+            <td>{{est.curso}}</td>
+            <td class="fila_costo">{{est.costo_total}}</td>
+            <td><a href="{% url 'inscripciones:editar_inscripcion' est.id %}" class="btn btn-info">Editar</a>  |  
+            <a href="{% url 'inscripciones:eliminar_inscripcion' est.id %}" class="btn btn-danger">Eliminar</a></td>
+        </tr>
+        {% endfor %}
+
+    </tbody>
+
+
+</table>
+
+<h7>Total Recaudado <span id="totaljs"></span></h7>
+
+
+<script>
+var suma_costos = document.querySelectorAll(".fila_costo");
+    var total = 0;
+    suma_costos.forEach(function (e) {
+        var suma = parseFloat(e.textContent);
+        total += suma;
+    });
+    var suma = document.querySelectorAll("#totaljs");
+    suma[0].innerHTML =total.toFixed(2)
+
+</script>
+{% endblock content %}

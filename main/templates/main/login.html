@@ -1,0 +1,14 @@
+{% extends "main/principal.html" %} 
+{% load bootstrap4 %}
+{% block content %}   
+
+<form action="" method="POST">
+    {% csrf_token %} 
+    {% bootstrap_form form %}
+    <button class="btn" type="submit">Entrar</button>
+</form>
+
+Si aun no tienes una cuenta, ve a <a href="#">Registro</a>
+
+
+{% endblock %}
