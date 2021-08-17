@@ -2,6 +2,8 @@
 {% block titulo %} Inscripcion de Estudiantes {% endblock titulo%}
 
 {% block content %}
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
 <center><h3 id="tittle_pagina">Lista de Estudiantes Registrados {{ cursos }} </h3></center>
 
@@ -19,11 +21,11 @@
     {% endif %}
 </div>
 
-<table class="striped">
+<table class="table table-bordered">
     <thead>
-        <tr>    
-            <th>ID</th>
-            <th>Estudiante</th>    
+        <tr class="text-center">    
+            <th>Estudiante</th>
+            <th>Edad</th>   
             <th>Fecha de Inscripcion</th>    
             <th>Curso Inscrito</th>    
             <th>Precio</th>    
@@ -33,13 +35,13 @@
 
     <tbody>
         {% for est in inscritos_curso %}
-        <tr>    
-            <td>{{est.id}}</td>    
-            <td>{{est.estudiante}}</td>    
-            <td>{{est.fecha_inscripcion}}</td>    
-            <td>{{est.curso}}</td>
-            <td class="fila_costo">{{est.costo_total}}</td>
-            <td><a href="{% url 'inscripciones:editar_inscripcion' est.id %}" class="btn btn-info">Editar</a>  |  
+        <tr class="text-center">    
+            <td>{{est.Nombres}} {{est.Apellidos}}</td> 
+            <td class="text-center">{{est.edad}}</td>       
+            <td class="text-center">{{est.fecha_inscripcion}}</td>    
+            <td class="text-center">{{est.curso}}</td>
+            <td class="text-center">{{est.costo_total}}</td>
+            <td class="text-center"><a href="{% url 'inscripciones:editar_inscripcion' est.id %}" class="btn btn-info">Editar</a> |
             <a href="{% url 'inscripciones:eliminar_inscripcion' est.id %}" class="btn btn-danger">Eliminar</a></td>
         </tr>
         {% endfor %}

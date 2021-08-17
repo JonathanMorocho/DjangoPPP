@@ -5,10 +5,10 @@
 <form action="" method="POST">
     {% csrf_token %} 
     {% bootstrap_form form %}
-    <button class="btn" type="submit">Entrar</button>
+    <button class="btn btn-success" type="submit">Entrar</button>
 </form>
 
-Si aun no tienes una cuenta, ve a <a href="#">Registro</a>
+Si aun no tienes una cuenta, ve a <a class="btn btn-success" href="#">Registro</a>
 
 
 {% endblock %}

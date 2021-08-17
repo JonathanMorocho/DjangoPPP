@@ -65,6 +65,7 @@ def crear_curso(request):
         form = CursoForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('main:lista_form')
         else: 
             context = {
                 'forms': form

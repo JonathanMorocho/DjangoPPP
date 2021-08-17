@@ -8,7 +8,10 @@ from datetime import datetime
 
 class Inscripcion(models.Model):
     estudiante = models.ForeignKey(User, on_delete=models.CASCADE)
-    fecha_inscripcion = models.DateTimeField("fecha de publicacion", default=datetime.now())
+    Nombres = models.CharField(max_length=100)
+    Apellidos= models.CharField(max_length=100)
+    edad = models.IntegerField()
+    fecha_inscripcion = models.DateTimeField("fecha de inscripcion", default=datetime.now())
     curso = models.ForeignKey(Curso, on_delete=models.CASCADE)
     costo_total = models.DecimalField(max_digits=5, decimal_places=2)
     

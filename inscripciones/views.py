@@ -9,7 +9,7 @@ from django.db.models import Sum
 
 
 # Create your views here.
-
+#Para guardar las inscripciones
 def inscripciones_form(request, pk):
     print('Registro de Inscripciones')
     registro_form = RegistroForm(prefix='form_registro')
@@ -43,17 +43,17 @@ def inscripciones_form(request, pk):
     return render(request, 'inscripciones/inscripcion_form.html', contexto)
 
 
-
+#para mostrar la lista de inscripciones
 def lista_estudiantes(request):
 
     return render(request, "inscripciones/lista_inscritos.html", {"inscritos_curso":Inscripcion.objects.all})
 
-
+#eliminar estudiantes
 def eliminar_inscripcion(request,id):
     inscripcion = Inscripcion.objects.get(id = id)
     inscripcion.delete()
     return redirect('inscripciones:lista_estudiantes')  
-
+#editar estudiantes 
 def editar_inscripcion(request, id):
     inscripcion = Inscripcion.objects.get(id = id)
     user = inscripcion.estudiante

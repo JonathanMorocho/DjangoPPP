@@ -1,13 +1,15 @@
 {% extends "main/principal.html" %} 
 {% block content %}   
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
 <form action="" method="POST">
     {% csrf_token %} 
     {{form.as_p}}
-    <button class="btn" type="submit">Registrar</button>
+    <button class="btn btn-success" type="submit">Registrar</button>
 </form>
 
-Si ya tienes una cuente, ve a <a href="main:homepage">Entrar</a>
+Si ya tienes una cuente, ve a <a class="btn btn-outline-success" href="main:homepage">Entrar</a>
 
 
 {% endblock content%}

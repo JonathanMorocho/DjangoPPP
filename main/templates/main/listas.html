@@ -30,28 +30,32 @@
 
 
 {% block content %}
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
 {{block.super}}
 <center><h1>Lista de Cursos</h1></center>
 
-<table class="table-striped">
+<table class="table table-bordered">
     <thead>
-        <tr >    
+        <tr class="text-center">    
             <th>Título</th>    
             <th>Contenido</th>    
             <th>Fecha Publicada</th> 
+            <th>Costo</th>
             <th>Acciones</th>      
         </tr>
     </thead>
 
     <tbody>
         {% for cur in cursos %}
-        <tr>    
+        <tr class="text-center">    
             <td>{{cur.curso_titulo}}</td>    
-            <td>{{cur.curso_contenido}}</td>    
-            <td>{{cur.curso_publicado}}</td>
-            <td><a href="{% url 'main:editarCurso' cur.id %}" class="btn btn-info btn-sm">Editar</a>  |  
-            <a href="{% url 'main:eliminarCurso' cur.id %}" class="btn btn-danger">Eliminar</a></td>
-    
+            <td class="text-center">{{cur.curso_contenido}}</td>    
+            <td class="text-center">{{cur.curso_publicado}}</td>
+            <td class="text-center">{{cur.costo}}</td>
+            <td class="text-center"><a href="{% url 'main:editarCurso' cur.id %}" class="btn btn-info btn-sm">Editar</a> |
+            <a href="{% url 'main:eliminarCurso' cur.id %}" class="btn btn-danger">Eliminar</a></td> 
         </tr>
         {% endfor %}
 
