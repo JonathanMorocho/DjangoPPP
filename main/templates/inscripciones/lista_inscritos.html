@@ -37,10 +37,10 @@
         {% for est in inscritos_curso %}
         <tr class="text-center">    
             <td>{{est.Nombres}} {{est.Apellidos}}</td> 
-            <td class="text-center">{{est.edad}}</td>       
+            <td class="edad_promedio text-center">{{est.edad}}</td>       
             <td class="text-center">{{est.fecha_inscripcion}}</td>    
             <td class="text-center">{{est.curso}}</td>
-            <td class="text-center">{{est.costo_total}}</td>
+            <td class="fila_costo text-center">{{est.costo_total}}</td>
             <td class="text-center"><a href="{% url 'inscripciones:editar_inscripcion' est.id %}" class="btn btn-info">Editar</a> |
             <a href="{% url 'inscripciones:eliminar_inscripcion' est.id %}" class="btn btn-danger">Eliminar</a></td>
         </tr>
@@ -51,7 +51,9 @@
 
 </table>
 
-<h7>Total Recaudado <span id="totaljs"></span></h7>
+<h7>Total Recaudado: <span id="totaljs"></span></h7><br>
+<h7>Edad Promedio Frond: <span id="totaldeEdad"></span></h7>
+<h4>Edad Promedio Back: {{ suma_costos.edad__sum }} {{ tamaño.edad__count}}</h4>
 
 
 <script>
@@ -65,4 +67,24 @@ var suma_costos = document.querySelectorAll(".fila_costo");
     suma[0].innerHTML =total.toFixed(2)
 
 </script>
+<!--Sirve para calcular la media de edades de los Estudiante-->    
+<script>
+    var sumaFilas = document.querySelectorAll(".edad_promedio");
+    var total = 0;
+    var con = 0;
+    
+    sumaFilas.forEach(function(e){
+
+        var suma = parseFloat(e.textContent);
+        total += suma;
+        console.log(total);
+        console.log(sumaFilas.length)
+    });
+
+    resultado = (total/sumaFilas.length)
+    console.log(resultado)
+    var suma = document.querySelectorAll("#totaldeEdad");
+    suma[0].innerHTML = resultado.toFixed(1)
+</script>
+
 {% endblock content %}
