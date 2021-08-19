@@ -110,14 +110,14 @@ def editarCurso(request,id):
 def inscritosCurso(request, id):
     cursos = Curso.objects.get(id=id)
     inscritos_curso = Inscripcion.objects.filter(curso = cursos)
-    suma_costos = inscritos_curso.aggregate(Sum('edad'))
-    tamaño = inscritos_curso.aggregate(Count('edad'))
-    print(suma_costos)
-    print(tamaño)
+    suma_edad = inscritos_curso.aggregate(Sum('edad'))
+    div_edad = inscritos_curso.aggregate(Count('edad'))
+    print(suma_edad)
+    print(div_edad)
     contexto = {
         'cursos': cursos,
         'inscritos_curso': inscritos_curso, 
-        'suma_costos': suma_costos  ,
-        'tamaño' : tamaño,
+        'suma_edad': suma_edad,
+        'div_edad' : div_edad,
     }
     return render(request, 'inscripciones/lista_inscritos.html', contexto)

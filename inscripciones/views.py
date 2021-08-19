@@ -47,12 +47,12 @@ def inscripciones_form(request, pk):
 #para mostrar la lista de inscripciones
 def lista_estudiantes(request):
     inscritos_curso = Inscripcion.objects.all()
-    suma_costos = inscritos_curso.aggregate(Sum('edad'))
-    tamaño = inscritos_curso.aggregate(Count('edad'))
+    suma_edad = inscritos_curso.aggregate(Sum('edad'))
+    div_edad = inscritos_curso.aggregate(Count('edad'))
     contexto = {
         'inscritos_curso':inscritos_curso,
-        'suma_costos': suma_costos,
-        'tamaño' : tamaño,
+        'suma_edad': suma_edad,
+        'div_edad' : div_edad,
     }
     return render(request, "inscripciones/lista_inscritos.html", contexto)
 
