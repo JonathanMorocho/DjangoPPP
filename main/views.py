@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm 
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from django.db.models import Sum
+from django.db.models import Sum, Count
 from inscripciones.models import*
 from .models import Curso
   
@@ -110,10 +110,14 @@ def editarCurso(request,id):
 def inscritosCurso(request, id):
     cursos = Curso.objects.get(id=id)
     inscritos_curso = Inscripcion.objects.filter(curso = cursos)
-    suma_costos = inscritos_curso.aggregate(Sum('costo_total'))
+    suma_costos = inscritos_curso.aggregate(Sum('edad'))
+    tamaño = inscritos_curso.aggregate(Count('edad'))
+    print(suma_costos)
+    print(tamaño)
     contexto = {
         'cursos': cursos,
         'inscritos_curso': inscritos_curso, 
-        'suma_costos': suma_costos  
+        'suma_costos': suma_costos  ,
+        'tamaño' : tamaño,
     }
     return render(request, 'inscripciones/lista_inscritos.html', contexto)

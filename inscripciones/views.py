@@ -1,6 +1,5 @@
 from django.db.models.aggregates import Count
 from inscripciones.form import EstudianteForm, InscripcionForm, RegistroForm
-from main.views import registro
 from sys import prefix
 from .models import Inscripcion
 from django.shortcuts import redirect, render
@@ -47,8 +46,16 @@ def inscripciones_form(request, pk):
 
 #para mostrar la lista de inscripciones
 def lista_estudiantes(request):
-    
-    return render(request, "inscripciones/lista_inscritos.html", {"inscritos_curso":Inscripcion.objects.all})
+    inscritos_curso = Inscripcion.objects.all()
+    suma_costos = inscritos_curso.aggregate(Sum('edad'))
+    tamaño = inscritos_curso.aggregate(Count('edad'))
+    contexto = {
+        'inscritos_curso':inscritos_curso,
+        'suma_costos': suma_costos,
+        'tamaño' : tamaño,
+    }
+    return render(request, "inscripciones/lista_inscritos.html", contexto)
+
 
 #eliminar estudiantes
 def eliminar_inscripcion(request,id):
@@ -95,19 +102,6 @@ def editar_inscripcion(request, id):
 
 
 
-def edadPromedio(request, id):
-    cursos = Curso.objects.get(id=id)
-    inscritos_curso = Inscripcion.objects.filter(curso = cursos)
-    suma_costos = inscritos_curso.aggregate(Sum('edad'))
-    print(suma_costos)
-    tamaño = inscritos_curso.aggregate(Count('edad'))
-    print(tamaño)
-    contexto = {
-        'cursos': cursos,
-        'inscritos_curso': inscritos_curso, 
-        'suma_costos': suma_costos,
-        'tamaño' : tamaño,
-    }
-    return render(request, 'inscripciones/lista_inscritos.html', contexto)
+
 
 
